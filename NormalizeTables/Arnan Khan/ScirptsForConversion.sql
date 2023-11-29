@@ -8,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [Data].[CountryTest](
+CREATE TABLE [Data].[CountryOld](
 	[CountryName] [NVARCHAR](150) NULL,
 	[CountryISO2] [NCHAR](10) NULL,
 	[CountryISO3] [NCHAR](10) NULL,
@@ -19,7 +19,8 @@ CREATE TABLE [Data].[CountryTest](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-INSERT INTO Data.CountryTest(CountryName,CountryISO2,CountryISO3,SalesRegion,CountryFlag,FlagFileName,FlagFileType)
+
+INSERT INTO Data.CountryOld(CountryName,CountryISO2,CountryISO3,SalesRegion,CountryFlag,FlagFileName,FlagFileType)
 SELECT
 DISTINCT
 CountryName,CountryISO2,CountryISO3,SalesRegion,CountryFlag,FlagFileName,FlagFileType
@@ -31,13 +32,13 @@ INSERT INTO Data.SalesRegion(SalesRegion)
 SELECT
 DISTINCT
 SalesRegion
-FROM Data.CountryTest
+FROM Data.CountryOld
 
-INSERT INTO Data.Country(CountryFlag, FlagFileName,FlagFileType)
+INSERT INTO Data.CountryFlag(CountryFlag, FlagFileName,FlagFileType)
 SELECT
 DISTINCT
 CountryFlag,FlagFileName,FlagFileType
-FROM Data.CountryTest
+FROM Data.CountryOld
 
 
 INSERT INTO Data.Country(CountryName,CountryISO2,CountryISO3,SalesRegionId,CountryFlagId)
@@ -48,18 +49,37 @@ CT.CountryISO2,
 CT.CountryISO3,
 SR.SalesRegionId,
 1
-FROM Data.CountryTest AS CT
+FROM Data.CountryOld AS CT
 INNER JOIN Data.SalesRegion AS SR ON CT.SalesRegion = SR.SalesRegion
 
 --------------------------------------------------------------------------------------------------------------------------
+USE [PrestigeCars]
+GO
 
+/****** Object:  Table [Data].[CustomerOld]    Script Date: 11/27/2023 8:35:20 PM ******/
+SET ANSI_NULLS ON
+GO
 
+SET QUOTED_IDENTIFIER ON
+GO
 
-SELECT *
-FROM Data.CustomerTest
-SELECT * 
-FROM Data.CustomerStatus
-SELECT * FROM DATA.Country
+CREATE TABLE [Data].[CustomerOld](
+	[CustomerID] [NVARCHAR](5) NOT NULL,
+	[CustomerName] [NVARCHAR](150) NULL,
+	[Address1] [NVARCHAR](50) NULL,
+	[Address2] [NVARCHAR](50) NULL,
+	[Town] [NVARCHAR](50) NULL,
+	[PostCode] [NVARCHAR](50) NULL,
+	[Country] [NCHAR](10) NULL,
+	[IsReseller] [BIT] NULL,
+	[IsCreditRisk] [BIT] NULL
+) ON [PRIMARY]
+GO
+
+INSERT INTO Data.[CustomerOld] (CustomerId, CustomerName,Address1,Address2,Town,PostCode,Country,IsReseller,IsCreditRisk)
+SELECT CustomerId, CustomerName,Address1,Address2,Town,PostCode,Country,IsReseller,IsCreditRisk FROM Data.Customer
+
+--DELETE DATA.CUSTOMER TABLE
 
 INSERT INTO Data.CustomerAddress(Address1,Address2,Town,PostCode,CountryId)
 SELECT DISTINCT

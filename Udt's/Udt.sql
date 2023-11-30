@@ -82,24 +82,6 @@ IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'Year2015' AND schema_id = S
 BEGIN
     CREATE TYPE [Udt].[Year2015] FROM [NUMERIC](38,2) NULL
 END
-
--- Check if [Year2016] type exists before creating
-IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'Year2016' AND schema_id = SCHEMA_ID('Udt'))
-BEGIN
-    CREATE TYPE [Udt].[Year2016] FROM [NUMERIC](38,2) NULL
-END
-
--- Check if [Year2017] type exists before creating
-IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'Year2017' AND schema_id = SCHEMA_ID('Udt'))
-BEGIN
-    CREATE TYPE [Udt].[Year2017] FROM [NUMERIC](38,2) NULL
-END
-
--- Check if [Year2018] type exists before creating
-IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'Year2018' AND schema_id = SCHEMA_ID('Udt'))
-BEGIN
-    CREATE TYPE [Udt].[Year2018] FROM [NUMERIC](38,2) NULL
-END
 ------------------------------------------------------------------------------------------------------------------
 IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'StockCode' AND schema_id = SCHEMA_ID('Udt'))
 BEGIN
@@ -112,19 +94,6 @@ BEGIN
     CREATE TYPE [Udt].[Cost] FROM money NULL
 END
 
-IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'RepairsCost' AND schema_id = SCHEMA_ID('Udt'))
-BEGIN
-    CREATE TYPE [Udt].[RepairsCost] FROM money NULL
-END
-
-IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'PartsCost' AND schema_id = SCHEMA_ID('Udt'))
-BEGIN
-    CREATE TYPE [Udt].[PartsCost] FROM money NULL
-END
-IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'TransportInCost' AND schema_id = SCHEMA_ID('Udt'))
-BEGIN
-    CREATE TYPE [Udt].[TransportInCost] FROM money NULL
-END
 
 IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'Color' AND schema_id = SCHEMA_ID('Udt'))
 BEGIN
@@ -149,3 +118,30 @@ IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'ModelId' AND schema_id = SC
 BEGIN
     CREATE TYPE [Udt].[ModelId] FROM smallint NULL
 END
+--UDT Def
+--Check if [SurrogateKeyInt] type exists before creating
+IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'CustomerNum' AND schema_id = SCHEMA_ID('Udt'))
+BEGIN
+    CREATE TYPE [Udt].[CustomerNum] FROM [NVARCHAR](5) NULL
+END
+
+IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'InvNum' AND schema_id = SCHEMA_ID('Udt'))
+BEGIN
+    CREATE TYPE [Udt].[InvNum] FROM [CHAR](8) NULL
+END
+
+IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'TotalPrice' AND schema_id = SCHEMA_ID('Udt'))
+BEGIN
+    CREATE TYPE [Udt].[TotalPrice] FROM [NUMERIC](18,2) NULL 
+END
+
+IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'Dte' AND schema_id = SCHEMA_ID('Udt'))
+BEGIN
+    CREATE TYPE [Udt].[Dte] FROM [datetime] NULL
+END
+
+IF NOT EXISTS (SELECT 1 FROM sys.types WHERE name = 'LineNum' AND schema_id = SCHEMA_ID('Udt'))
+BEGIN
+    CREATE TYPE [Udt].[LineNum] FROM [tinyint] NULL
+END
+

@@ -13,5 +13,6 @@ RETURN
 CREATE OR ALTER VIEW [Reference].view_MarketingCategories
 AS
 SELECT *
-FROM itv_dbo.GetMarketingCategories(1)
+FROM itv_dbo.GetMarketingCategories(4)
 GO
+

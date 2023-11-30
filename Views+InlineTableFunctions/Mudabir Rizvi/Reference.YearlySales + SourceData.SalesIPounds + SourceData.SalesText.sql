@@ -14,7 +14,7 @@ SELECT MakeName,ModelName,CustomerName,CountryName,Cost,RepairsCost,PartsCost,Tr
 CREATE OR ALTER VIEW [Reference].view_YearlySales
 AS
 SELECT *
-FROM itv_dbo.GetYearlySales(1)
+FROM itv_dbo.GetYearlySales(5)
 GO
 -------------------------------------------------------------------------------------------------------------
 
@@ -34,12 +34,9 @@ SELECT MakeName,ModelName,VehicleCost, @UserAuthorizationKey AS UserKey
 CREATE OR ALTER VIEW [SourceData].view_SalesInPounds
 AS
 SELECT *
-FROM itv_dbo.GetSalesInPounds(1)
+FROM itv_dbo.GetSalesInPounds(5)
 GO
 --------------------------------------------------------------------------------------------
-
-
-
 --Inline Tables Value Function
 CREATE OR ALTER FUNCTION itv_dbo.GetSalesText
 (@UserAuthorizationKey AS INT)
@@ -54,5 +51,8 @@ SELECT CountryName,MakeName,Cost,SalePrice, @UserAuthorizationKey AS UserKey
 CREATE OR ALTER VIEW [SourceData].view_SalesText
 AS
 SELECT *
-FROM itv_dbo.GetSalesText(1)
+FROM itv_dbo.GetSalesText(5)
 GO
+
+SELECT * 
+FROM DbSecurity.UserAuthorization

@@ -13,5 +13,5 @@ RETURN
 CREATE OR ALTER VIEW [Reference].view_Forex
 AS
 SELECT *
-FROM itv_dbo.GetForex(1)
+FROM itv_dbo.GetForex(4)
 GO
